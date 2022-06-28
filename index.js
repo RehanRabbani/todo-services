@@ -1,5 +1,5 @@
 const express = require("express");
-
+const Joi = require("joi");
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -34,6 +34,15 @@ app.get("/api/todos/:id", (req, res) => {
 });
 
 app.post("/api/todos", (req, res) => {
+  const schema = Joi.object({
+    name: Joi.string().min(3).required(),
+  });
+  const result = schema.validate(req.body);
+
+  if (result.error) {
+    res.status(400).send(result.error);
+  }
+
   const todo = {
     id: todos.length + 1,
     name: req.body.name,
@@ -42,6 +51,25 @@ app.post("/api/todos", (req, res) => {
   res.send(todo);
 });
 
+app.put("/api/todos/:id", (req, res) => {
+  const todo = todos.find((td) => td.id === parseInt(req.params.id));
+  if (!todo) res.status(404).send("Not found");
+  const result = valdation(req.body);
+  if (result.error) {
+    res.status(400).send(result.error);
+  }
+
+  todo.name = req.body.name;
+  res.send(todo);
+});
+
 app.listen(port, () => {
   console.log("server running on " + port);
 });
+
+const valdation = (params) => {
+  const schema = Joi.object({
+    name: Joi.string().min(3).required(),
+  });
+  return schema.validate(params);
+};
