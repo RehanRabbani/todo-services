@@ -12,3 +12,4 @@ End Points
 2. Get todos by Id.
 3. Post todo.
 4. Update todo (PUT).
+5. Delete todo.
