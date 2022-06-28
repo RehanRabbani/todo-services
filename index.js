@@ -2,10 +2,34 @@ const express = require("express");
 
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
+const todos = [
+  {
+    id: "1",
+    name: "todo 1",
+  },
+  {
+    id: "2",
+    name: "todo 2",
+  },
+  {
+    id: "3",
+    name: "todo 3",
+  },
+];
 app.get("/", (req, res) => {
   res.send("Hello world 1");
+});
+
+app.get("/api/todos", (req, res) => {
+  res.send(todos);
+});
+
+app.get("/api/todos/:id", (req, res) => {
+  const todo = todos.find((td) => td.id === req.params.id);
+  if (!todo) res.status(404).send("Not found");
+  res.send(todo);
 });
 
 app.listen(port, () => {
