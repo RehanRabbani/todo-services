@@ -7,6 +7,7 @@ LIB:
 3. Joi lib for validation purpose.
 
 End Points :
+ 1.ss
 1.Get all todos.
 2.Get todos by Id.
 3.Post todo.
