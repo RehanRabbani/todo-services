@@ -18,7 +18,9 @@ const todos = [
     name: "todo 3",
   },
 ];
+
 app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hello world 1");
 });
@@ -34,14 +36,9 @@ app.get("/api/todos/:id", (req, res) => {
 });
 
 app.post("/api/todos", (req, res) => {
-  const schema = Joi.object({
-    name: Joi.string().min(3).required(),
-  });
-  const result = schema.validate(req.body);
+  const result = valdation(req.body);
 
-  if (result.error) {
-    res.status(400).send(result.error);
-  }
+  if (result.error) return res.status(400).send(result.error);
 
   const todo = {
     id: todos.length + 1,
@@ -53,13 +50,18 @@ app.post("/api/todos", (req, res) => {
 
 app.put("/api/todos/:id", (req, res) => {
   const todo = todos.find((td) => td.id === parseInt(req.params.id));
-  if (!todo) res.status(404).send("Not found");
+  if (!todo) return res.status(404).send("Not found");
   const result = valdation(req.body);
-  if (result.error) {
-    res.status(400).send(result.error);
-  }
-
+  if (result.error) return res.status(400).send(result.error);
   todo.name = req.body.name;
+  res.send(todo);
+});
+
+app.delete("/api/todos/:id", (req, res) => {
+  const todo = todos.find((td) => td.id === parseInt(req.params.id));
+  if (!todo) return res.status(404).send("Not found");
+  const index = todos.indexOf(todo);
+  todos.splice(index, 1);
   res.send(todo);
 });
 
