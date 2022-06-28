@@ -1,5 +1,5 @@
 # todo-services
-In this we following features;
+In this we have following features;
 
 LIB:
 1. express server.
@@ -8,11 +8,7 @@ LIB:
 
 
 End Points
-
-1.Get all todos.
-
-2.Get todos by Id.
-
-3.Post todo.
-
-4.Update todo (PUT).
+1. Get all todos.
+2. Get todos by Id.
+3. Post todo.
+4. Update todo (PUT).
