@@ -16,6 +16,6 @@ End Points / Features
 3. Post todo.
 4. Update todo (PUT).
 5. Delete todo.
-6. Set logging on dev env.
+6. use morgan middle ware for set logging on dev env.
 7. Set config folder for configuration of dev,prod env .
 8. Add routes file
