@@ -1,10 +1,15 @@
 // morgan : middle ware for logging
 const morgan = require("morgan");
+const config = require("config");
 const express = require("express");
 const Joi = require("joi");
+const { required } = require("joi");
 const app = express();
 const port = process.env.PORT || 3000;
 
+console.log("name" + config.get("name"));
+console.log("mail", config.get("mail.host"));
+console.log("password", config.get("mail.password"));
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
 }
