@@ -1,9 +1,13 @@
+// morgan : middle ware for logging
+const morgan = require("morgan");
 const express = require("express");
 const Joi = require("joi");
 const app = express();
-
 const port = process.env.PORT || 3000;
 
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+}
 const todos = [
   {
     id: 1,
